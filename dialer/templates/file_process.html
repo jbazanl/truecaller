@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if output %}
+    <h1>Processing Results</h1>
+    <p>{{ output }}</p>
+    <p><a href="{% url 'file_list' %}">Back to file list</a></p>
+  {% else %}
+    <h1>Error</h1>
+    <p>{{ error }}</p>
+  {% endif %}
+{% endblock %}
+

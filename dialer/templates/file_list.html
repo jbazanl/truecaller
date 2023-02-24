@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}File List{% endblock %}
+
+{% block content %}
+  <h1>File List</h1>
+
+  <form method="post" action="{% url 'file_process' %}">
+    {% csrf_token %}
+    <label for="file">Select a 404 file:</label>
+    <select name="file" id="file">
+      {% for file in files %}
+        <option value="{{ file }}">{{ file }}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <label for="text_input">Número móvil destino (Ejm: 51983434724):</label>
+    <input type="text" name="text_input" id="text_input">
+    <br>
+    <input type="submit" value="Process file">
+  </form>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>404 Files (Last week)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files %}
+      <tr>
+        <td>{{ file }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="1">No files found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+{% endblock %}
